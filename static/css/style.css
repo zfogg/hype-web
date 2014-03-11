@@ -7,3 +7,13 @@ body {
 	font: 14px Strait;
 	color: white;
 }
+
+.center {
+	width: 200px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.center img {
+	width: 100%;
+}
