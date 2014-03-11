@@ -9,5 +9,5 @@ run these commands
 
 * bower install
 
-* save grunt serve
+* grunt serve
 
