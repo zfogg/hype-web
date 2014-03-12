@@ -1,5 +1,14 @@
 $(function(){
 
+//var myRootRef = new Firebase('https://hypeapp.firebase.io');
+//myRootRef.set('Hello World!');
+
+var dataRef = new Firebase('https://hypeapp.firebaseio.com');
+dataRef.on('value', function(snapshot) {
+    console.log('Hype: ' + snapshot.val());
+});
+
+
     // heatmap configuration
     var config = {
         element: document.getElementById("heatmapArea"),
