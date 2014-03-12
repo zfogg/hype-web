@@ -29,11 +29,20 @@ dataRef.on('value', function(snapshot) {
 
     var dataRef = new Firebase('https://hypeapp.firebaseio.com');
     dataRef.on('value', function(snapshot) {
-        var val = snapshot.val();
-        console.log(val);
+        var obj = snapshot.val();
 
         var data = [];
-        data.push({ x: W, y: H, count: val*0.5 });
+        
+        // http://stackoverflow.com/questions/684672/loop-through-javascript-object
+        var i = 1;
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                i++;
+                var val = obj[key];
+                data.push({ x: 100 * i, y: 400, count: val*0.5 });
+            }
+        }
+
         var hmData = {
             max: 100,
             data: data
