@@ -1,9 +1,6 @@
 var hmData = {};
 $(function(){
 
-//var myRootRef = new Firebase('https://hypeapp.firebase.io');
-//myRootRef.set('Hello World!');
-
 var dataRef = new Firebase('https://hypeapp.firebaseio.com');
 dataRef.on('value', function(snapshot) {
     console.log('Hype: ' + snapshot.val());
@@ -13,15 +10,15 @@ dataRef.on('value', function(snapshot) {
     // heatmap configuration
     var heatmap$ = document.getElementById("heatmapArea");
     var canvas$ = document.getElementById("canvas");
+    var radius = 50;
     var config = {
         element: heatmap$,
-        radius: 280,
+        radius: radius,
         opacity: 80
     };
 
-    var W = canvas$.width,
-        H = canvas$.height;
-
+    var W = canvas$.width, * Math.random() + radius,
+        H = canvas$.height * Math.random() + radius;
 
     //creates and initializes the heatmap
     var heatmap = h337.create(config);
@@ -33,9 +30,9 @@ dataRef.on('value', function(snapshot) {
         var hmData = {
             max: 100,
             data: [
-                { x: W*1.5,
-                y:   H*2.0,
-                count: val*0.5 }
+                { x: W,
+                  y: H,
+                  count: val*0.5 }
             ]
         };
         $("#hypeScore").text(val);
