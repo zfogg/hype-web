@@ -29,7 +29,14 @@ h1 {
 }
 
 #heatmapArea {
+	position: relative;
 	padding: 2%;
 	width: 96%;
 	height: 400px;
+}
+
+#heatmapArea canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
