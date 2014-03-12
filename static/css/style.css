@@ -27,3 +27,9 @@ h1 {
 	background-size: 40px 60px;
 	font-size: 26px;
 }
+
+#heatmapArea {
+	padding: 2%;
+	width: 96%;
+	height: 400px;
+}
