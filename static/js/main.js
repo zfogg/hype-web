@@ -31,13 +31,12 @@ dataRef.on('value', function(snapshot) {
     dataRef.on('value', function(snapshot) {
         var val = snapshot.val();
         console.log(val);
+
+        var data = [];
+        data.push({ x: W, y: H, count: val*0.5 });
         var hmData = {
             max: 100,
-            data: [
-                { x: W,
-                  y: H,
-                  count: val*0.5 }
-            ]
+            data: data
         };
         $("#hypeScore").text(val);
         heatmap.store.setDataSet(hmData);
