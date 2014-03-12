@@ -21,7 +21,7 @@ dataRef.on('value', function(snapshot) {
         opacity: 80
     };
 
-    var W = canvas$.width, * Math.random() + radius,
+    var W = canvas$.width * Math.random() + radius,
         H = canvas$.height * Math.random() + radius;
 
     //creates and initializes the heatmap
