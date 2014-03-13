@@ -6,6 +6,13 @@ angular.module('hypeApp')
 
     $scope.hypeFactor = 0
 
+
+    randomN = (min, max) ->
+      Math.random() * (max - min) + min
+
+    randomInt = (min, max) ->
+      Math.floor(Math.random() * (max - min + 1)) + min
+
     dataRef = new Firebase("https://hypeapp.firebaseio.com")
     dataRef.on "value", (snapshot) ->
       #console.debug snapshot.val() if Math.random() > 0.9
@@ -28,6 +35,7 @@ angular.module('hypeApp')
     hmF = (n) ->
       Math.log(n+1)
 
+    spots = {}
     dataRef.on "value", (snapshot) ->
       obj     = snapshot.val()
       i       = 0
@@ -35,10 +43,18 @@ angular.module('hypeApp')
 
       data = for key of obj when obj.hasOwnProperty(key)
         d = obj[key]
+
+        if not spots[key]
+          spots[key] =
+            x: randomInt config.radius, ((W*4) - config.radius)
+            y: randomInt config.radius, ((H*1) - config.radius)
+
         hypeScore = Math.max Math.abs(d.x), Math.abs(d.y), Math.abs(d.z)
         $scope.hypeFactor += hypeScore
-        x: 380 + (++i*100)
-        y: (H/2) - (config.radius/2)
+        #x: 380 + (++i*100)
+        #y: (H/2) - (config.radius/2)
+        x: spots[key].x
+        y: spots[key].y
         count: hmF(700*(hypeScore - 9.82))
 
       $scope.$apply -> $scope.hypeFactor = Math.floor $scope.hypeFactor
