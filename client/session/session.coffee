@@ -6,7 +6,7 @@ angular.module('hypeApp')
 
     dataRef = new Firebase("https://hypeapp.firebaseio.com")
     dataRef.on "value", (snapshot) ->
-      console.debug snapshot.val() if Math.random() > 0.9
+      #console.debug snapshot.val() if Math.random() > 0.9
 
     heatmap$ = $("#heatmapArea")[0]
 
@@ -17,26 +17,30 @@ angular.module('hypeApp')
       radius:  40
       opacity: 100
 
-    W = canvas$.width * Math.random() + config.radius
-    H = canvas$.height * Math.random() + config.radius
+    W = canvas$.width
+    H = canvas$.height
+    console.log W
 
     heatmap = h337.create(config)
 
 
     dataRef.on "value", (snapshot) ->
-      obj = snapshot.val()
-      i = 0
+      obj     = snapshot.val()
+      i       = 0
       hypeSum = 0
 
       data = for key of obj when obj.hasOwnProperty(key)
+        d = obj[key]
+        hypeScore = Math.max Math.abs(d.x), Math.abs(d.y), Math.abs(d.z)
+        console.log hypeScore
         hypeSum += obj[key]
-        x: (150 * ++i)
-        y: 100
-        count: obj[key]
+        x: (W/2) - (config.radius/2) + (++i*100)
+        y: (H/2) - (config.radius/2)
+        count: hypeScore
 
       $("#hypeScore").text hypeSum
 
       heatmap.store.setDataSet
-        max: 650
+        max: 20
         data: data
 
