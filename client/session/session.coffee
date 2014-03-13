@@ -4,6 +4,8 @@ angular.module('hypeApp')
 
     $scope.params = $stateParams
 
+    $scope.hypeFactor = 0
+
     dataRef = new Firebase("https://hypeapp.firebaseio.com")
     dataRef.on "value", (snapshot) ->
       #console.debug snapshot.val() if Math.random() > 0.9
@@ -19,27 +21,29 @@ angular.module('hypeApp')
 
     W = canvas$.width
     H = canvas$.height
-    console.log W
 
     heatmap = h337.create(config)
 
 
+    hmF = (n) ->
+      Math.log(n+1)
+
     dataRef.on "value", (snapshot) ->
       obj     = snapshot.val()
       i       = 0
-      hypeSum = 0
+      $scope.hypeFactor = 0
 
       data = for key of obj when obj.hasOwnProperty(key)
         d = obj[key]
         hypeScore = Math.max Math.abs(d.x), Math.abs(d.y), Math.abs(d.z)
-        hypeSum += obj[key]
-        x: (W/2) - (config.radius/2) + (++i*100)
+        $scope.hypeFactor += hypeScore
+        x: 380 + (++i*100)
         y: (H/2) - (config.radius/2)
-        count: hypeScore
+        count: hmF(700*(hypeScore - 9.82))
 
-      $("#hypeScore").text hypeSum
+      $scope.$apply -> $scope.hypeFactor = Math.floor $scope.hypeFactor
 
       heatmap.store.setDataSet
-        max: 30
+        max: 15
         data: data
 
