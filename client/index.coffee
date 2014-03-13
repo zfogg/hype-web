@@ -140,3 +140,131 @@ hype = angular.module("hypeApp", [
         method: 'PUT'
     })
 
+
+  .factory "harlemshake", ->
+    ->
+      c = ->
+        e = document.createElement("link")
+        e.setAttribute "type", "text/css"
+        e.setAttribute "rel", "stylesheet"
+        e.setAttribute "href", f
+        e.setAttribute "class", l
+        document.body.appendChild e
+      h = ->
+        e = document.getElementsByClassName(l)
+        t = 0
+
+        while t < e.length
+          document.body.removeChild e[t]
+          t++
+      p = ->
+        e = document.createElement("div")
+        e.setAttribute "class", a
+        document.body.appendChild e
+        setTimeout (->
+          document.body.removeChild e
+        ), 100
+      d = (e) ->
+        height: e.offsetHeight
+        width: e.offsetWidth
+      v = (i) ->
+        s = d(i)
+        s.height > e and s.height < n and s.width > t and s.width < r
+      m = (e) ->
+        t = e
+        n = 0
+        until not t
+          n += t.offsetTop
+          t = t.offsetParent
+        n
+      g = ->
+        e = document.documentElement
+        unless not window.innerWidth
+          return window.innerHeight
+        else return e.clientHeight  if e and not isNaN(e.clientHeight)
+        0
+      y = ->
+        return window.pageYOffset  if window.pageYOffset
+        Math.max document.documentElement.scrollTop, document.body.scrollTop
+      E = (e) ->
+        t = m(e)
+        t >= w and t <= b + w
+      S = ->
+        e = document.createElement("audio")
+        e.setAttribute "class", l
+        e.src = i
+        e.loop = false
+        e.addEventListener "canplay", (->
+          setTimeout (->
+            x k
+          ), 500
+          setTimeout (->
+            N()
+            p()
+            e = 0
+
+            while e < O.length
+              T O[e]
+              e++
+          ), 15500
+        ), true
+        e.addEventListener "ended", (->
+          N()
+          h()
+        ), true
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>"
+        document.body.appendChild e
+        e.play()
+      x = (e) ->
+        e.className += " " + s + " " + o
+      T = (e) ->
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+      N = ->
+        e = document.getElementsByClassName(s)
+        t = new RegExp("\\b" + s + "\\b")
+        n = 0
+
+        while n < e.length
+          e[n].className = e[n].className.replace(t, "")
+      e = 30
+      t = 30
+      n = 350
+      r = 350
+      i = "http://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3"
+      s = "mw-harlem_shake_me"
+      o = "im_first"
+      u = [
+        "im_drunk"
+        "im_baked"
+        "im_trippin"
+        "im_blown"
+      ]
+      a = "mw-strobe_light"
+      f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css"
+      l = "mw_added_css"
+      b = g()
+      w = y()
+      C = document.getElementsByTagName("*")
+      k = null
+      L = 0
+
+      while L < C.length
+        A = C[L]
+        if v(A)
+          if E(A)
+            k = A
+            break
+        L++
+      if A is null
+        console.warn "Could not find a node of the right size. Please try a different page."
+        return
+      c()
+      S()
+      O = []
+      L = 0
+
+      while L < C.length
+        A = C[L]
+        O.push A  if v(A)
+        L++
+

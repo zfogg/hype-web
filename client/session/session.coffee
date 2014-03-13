@@ -1,5 +1,5 @@
 angular.module('hypeApp')
-  .controller 'SessionCtrl', ($scope, $rootScope, colors, $firebase, $stateParams) ->
+  .controller 'SessionCtrl', ($scope, $rootScope, colors, $firebase, $stateParams, harlemshake) ->
     $rootScope.bodyCSS["background-color"] = colors["grey-light"]
 
     $scope.params = $stateParams
@@ -36,12 +36,14 @@ angular.module('hypeApp')
       Math.log(n+1)
 
     spots = {}
+    hyped = false
     dataRef.on "value", (snapshot) ->
       obj     = snapshot.val()
       i       = 0
-      $scope.hypeFactor = 0
+      hypeSum = 0
 
       data = for key of obj when obj.hasOwnProperty(key)
+        i++
         d = obj[key]
 
         if not spots[key]
@@ -50,16 +52,20 @@ angular.module('hypeApp')
             y: randomInt config.radius, ((H*1) - config.radius)
 
         hypeScore = Math.max Math.abs(d.x), Math.abs(d.y), Math.abs(d.z)
-        $scope.hypeFactor += hypeScore
+        hypeSum += hypeScore
         #x: 380 + (++i*100)
         #y: (H/2) - (config.radius/2)
         x: spots[key].x
         y: spots[key].y
         count: hmF(700*(hypeScore - 9.82))
 
-      $scope.$apply -> $scope.hypeFactor = Math.floor $scope.hypeFactor
+      $scope.$apply ->
+        $scope.hypeFactor = Math.floor(hypeSum/i)
+        if $scope.hypeFactor >= 11 and not hyped
+          hyped = true
+          harlemshake()
 
       heatmap.store.setDataSet
-        max: 15
+        max: 9
         data: data
 
