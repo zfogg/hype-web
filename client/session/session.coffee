@@ -61,9 +61,6 @@ angular.module('hypeApp')
 
       $scope.$apply ->
         $scope.hypeFactor = Math.floor(hypeSum/i)
-        if $scope.hypeFactor >= 11 and not hyped
-          hyped = true
-          harlemshake()
 
       heatmap.store.setDataSet
         max: 9
