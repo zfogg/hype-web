@@ -9,6 +9,7 @@ ready.then ->
 
   # Angular Routes
   app.get "/",             indexRoute
+  app.get "/sesh/:sesh",   indexRoute
 
   app.get "/404", indexRoute
   app.get "/*", [(req, res, next) ->
