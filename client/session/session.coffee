@@ -41,6 +41,6 @@ angular.module('hypeApp')
       $("#hypeScore").text hypeSum
 
       heatmap.store.setDataSet
-        max: 20
+        max: 30
         data: data
 
