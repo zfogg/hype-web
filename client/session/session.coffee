@@ -32,7 +32,6 @@ angular.module('hypeApp')
       data = for key of obj when obj.hasOwnProperty(key)
         d = obj[key]
         hypeScore = Math.max Math.abs(d.x), Math.abs(d.y), Math.abs(d.z)
-        console.log hypeScore
         hypeSum += obj[key]
         x: (W/2) - (config.radius/2) + (++i*100)
         y: (H/2) - (config.radius/2)
