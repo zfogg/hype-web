@@ -1,0 +1,11 @@
+#session(ng-show="isLoaded")
+  .row.hype-row
+    .col-xs-12
+      a(ui-sref="main")
+        h2 Hype
+      h3 sesh: 
+        b {{params.sesh}}
+
+  .row.hype-row
+    #heatmapArea
+        canvas#canvas

@@ -1,4 +1,5 @@
 var hmData = {};
+
 $(function(){
 
     var dataRef = new Firebase('https://hypeapp.firebaseio.com');
@@ -7,44 +8,43 @@ $(function(){
         console.log('Hype: ' + snapshot.val());
     });
 
+    var heatmap$ = document.getElementById("heatmapArea"),
+        canvas$  = document.getElementById("canvas"),
 
-    // heatmap configuration
-    var heatmap$ = document.getElementById("heatmapArea");
-    var canvas$ = document.getElementById("canvas");
-    var radius = 50;
-    var config = {
-        element: heatmap$,
-        radius: radius,
-        opacity: 80
-    };
+        config = {
+            element: heatmap$,
+            radius:  radius,
+            opacity: 80
+        },
 
-    var W = canvas$.width * Math.random() + radius,
-    H = canvas$.height * Math.random() + radius;
+        W       = canvas$.width  * Math.random() + config.radius,
+        H       = canvas$.height * Math.random() + config.radius,
+        heatmap = h337.create(config);
 
-    //creates and initializes the heatmap
-    var heatmap = h337.create(config);
 
     dataRef.on('value', function(snapshot) {
-        var obj = snapshot.val();
+        var obj     = snapshot.val(),
+            data    = [],
+            i       = 0,
+            hypeSum = 0;
 
-        var data = [];
-
-        // http://stackoverflow.com/questions/684672/loop-through-javascript-object
-        var i = 1;
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
-                i++;
-                var val = obj[key];
-                data.push({ x: 100 * i, y: 400, count: val*0.5 });
+                hypeSum += obj[key];
+                data.push({
+                    x: (100*i++), y: 400,
+                    count: val*0.5
+                });
             }
         }
 
-        var hmData = {
-            max: 100,
+        $("#hypeScore").text(hypeSum);
+
+        heatmap.store.setDataSet({
+            max:  100,
             data: data
-        };
-        $("#hypeScore").text(val);
-        heatmap.store.setDataSet(hmData);
+        });
+
     });
 });
 

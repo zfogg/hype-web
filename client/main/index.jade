@@ -1,0 +1,24 @@
+#main(ng-show="isLoaded")
+  header#header.row.hype-row
+    div(ng-include="" src="'layout/header-logo.html'" onload="isLoaded = true")
+    .col-xs-12
+      h1 hype
+      h2 You're at a live music event.
+      h3
+        | Everyone has an <b>accelerometer</b> in their <span style="text-decoration:underline;">pocket</span>,
+        br
+        em and they're all dancing.
+
+  .row.hype-row
+    .col-xs-12
+      h3.b
+        small trending seshes
+      .row
+        p.col-xs-12
+          a(ui-sref="session({sesh: 'gambino'})") gambino
+        p.col-xs-12
+          a(ui-sref="session({sesh: 'kanye'})") kanye
+        p.col-xs-12
+          a(ui-sref="session({sesh: 'snoop'})") snoop
+        p.col-xs-12
+          a(ui-sref="session({sesh: 'bitcamp'})") bitcamp

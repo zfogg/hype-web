@@ -1,0 +1,20 @@
+{
+  "name": "hype",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.2.0",
+    "sass-bootstrap": "~3.0.0",
+    "angular-animate": "~1.2.12",
+    "angular-resource": "~1.2.0",
+    "angular-cookies": "~1.2.0",
+    "angular-sanitize": "~1.2.0",
+    "jquery-ui": "~1.10.3",
+    "socket.io-client": "~0.9.16",
+    "jquery": "~2.1.0",
+    "flowtype": "*",
+    "animate.css": "~3.0.0",
+    "angular-ui-router": "0.2.8-bowratic-tedium",
+    "moment": "~2.5.1",
+    "heatmap.js": "~0.0.1"
+  }
+}
