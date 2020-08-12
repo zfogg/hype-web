@@ -6,7 +6,7 @@
   },
   "repository": "http://github.com/hype/hype",
   "dependencies": {
-    "express": "~3.4.3",
+    "express": "~4.17.1",
     "jade": "~1.1.5",
     "socket.io": "~0.9.16",
     "validator": "~2.0.0",
